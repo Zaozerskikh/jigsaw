@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane id="pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.2" fx:controller="jigsaw.controllers.InfoController" xmlns:fx="http://javafx.com/fxml/1">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="100.0" prefWidth="100.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="266.28572954450334" minHeight="10.0" percentHeight="100.0" prefHeight="266.28572954450334" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="400.0" prefWidth="500.0" style="-fx-background: transparent; -fx-background-color: transparent;">
+        <TextArea editable="false" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400" prefWidth="500" text="This game is a simplified version of Tetris.&#10;Figures are dragged onto the field with the mouse.&#10;Dragging occurs from the center of the 3 by 3 box in which the shape is initially generated. &#10;To end the game, you must click the button at the bottom right in the window with the game.&#10;">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </TextArea>
+    </ScrollPane>
+</GridPane>
