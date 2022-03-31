@@ -16,7 +16,7 @@ public class RandomColorPicker implements ColorPicker {
 
     /**
      * Picks random color.
-     * @return generated color.
+     * @return picked color.
      */
     public Color getColor() {
         // avoiding color repeat.

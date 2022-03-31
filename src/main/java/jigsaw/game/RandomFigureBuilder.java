@@ -1,7 +1,9 @@
 package jigsaw.game;
 
+import jigsaw.main.JavaFxApp;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -29,7 +31,7 @@ public class RandomFigureBuilder implements FigureBuilder {
      * Building random figure matrix.
      * @return random figure matrix.
      */
-    private boolean[][] buildFigureMatrix() {
+    public boolean[][] buildRandomFigureMatrix() {
         // avoiding repetitions of figures
         int rand;
         do {
@@ -43,37 +45,37 @@ public class RandomFigureBuilder implements FigureBuilder {
             matrix[1][1] = true;  // * 0 *
             matrix[1][2] = true;  // * 0 *
             matrix[2][0] = true;
-        } else if (rand > 3 && rand < 8) {
+        } else if (rand < 8) {
             matrix[1][0] = true;  // 0 0 *
             matrix[1][1] = true;  // * 0 *
             matrix[1][2] = true;  // * 0 *
             matrix[0][0] = true;
-        } else if (rand > 7 && rand < 12) {
+        } else if (rand < 12) {
             matrix[0][0] = true;  // 0 * *
             matrix[0][1] = true;  // 0 0 *
             matrix[1][1] = true;  // * 0 *
             matrix[1][2] = true;
-        } else if (rand > 11 && rand < 16) {
+        } else if (rand < 16) {
             matrix[2][0] = true;  // * * 0
             matrix[2][1] = true;  // * * 0
             matrix[2][2] = true;  // 0 0 0
             matrix[1][2] = true;
             matrix[0][2] = true;
-        } else if (rand > 15 && rand < 20) {
+        } else if (rand < 20) {
             matrix[1][0] = true;  // * 0 *
             matrix[1][1] = true;  // * 0 *
             matrix[1][2] = true;  // 0 0 0
             matrix[2][2] = true;
             matrix[0][2] = true;
-        } else if (rand > 19 && rand < 22) {
+        } else if (rand < 22) {
             matrix[0][1] = true;  // * * *
             matrix[1][1] = true;  // 0 0 0
             matrix[2][1] = true;  // * * *
-        } else if (rand > 21 && rand < 26) {
+        } else if (rand < 26) {
             matrix[1][1] = true;  // * * *
             matrix[2][1] = true;  // * 0 0
             matrix[1][2] = true;  // * 0 *
-        } else if (rand > 25 && rand < 30) {
+        } else if (rand < 30) {
             matrix[0][0] = true;  // 0 * *
             matrix[0][1] = true;  // 0 0 *
             matrix[0][2] = true;  // 0 * *
@@ -95,23 +97,21 @@ public class RandomFigureBuilder implements FigureBuilder {
     private boolean checkRepetitions(int figureIdx) {
         if (figureIdx < 4) {
             return lastFigure >= 4;
-        } else if (figureIdx > 3 && figureIdx < 8) {
+        } else if (figureIdx < 8) {
             return lastFigure <= 3 || lastFigure >= 8;
-        } else if (figureIdx > 7 && figureIdx < 12) {
+        } else if (figureIdx < 12) {
             return lastFigure <= 7 || lastFigure >= 12;
-        } else if (figureIdx > 11 && figureIdx < 16) {
+        } else if (figureIdx < 16) {
             return lastFigure <= 11 || lastFigure >= 16;
-        } else if (figureIdx > 15 && figureIdx < 20) {
+        } else if (figureIdx < 20) {
             return lastFigure <= 15 || lastFigure >= 20;
-        } else if (figureIdx > 19 && figureIdx < 22) {
+        } else if (figureIdx < 22) {
             return lastFigure <= 19 || lastFigure >= 22;
-        } else if (figureIdx > 21 && figureIdx < 26) {
+        } else if (figureIdx < 26) {
             return lastFigure <= 21 || lastFigure >= 26;
-        } else if (figureIdx > 25 && figureIdx < 30) {
+        } else if (figureIdx < 30) {
             return lastFigure <= 25 || lastFigure >= 30;
-        }  else {
-            return lastFigure != 31;
-        }
+        }  else return lastFigure != 30;
     }
 
     /**
@@ -159,8 +159,8 @@ public class RandomFigureBuilder implements FigureBuilder {
      */
     @Override
     public Figure buildFigure() {
-        Figure figure = new Figure();
-        figure.setFigureMatrix(buildFigureMatrix());
+        Figure figure = JavaFxApp.getContext().getBean(Figure.class);
+        figure.setFigureMatrix(buildRandomFigureMatrix());
         return figure;
     }
 }

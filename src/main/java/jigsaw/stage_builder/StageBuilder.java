@@ -57,9 +57,10 @@ public class StageBuilder {
             ((Pane)((GridPane)stage.getScene().getRoot().getChildrenUnmodifiable().get(0)).getChildren().get(3)).getChildren().add(buildGrid(3));
         }
 
-        // stage
+        // stage decoration.
         stage.getScene().getStylesheets().add(StageBuilder.class.getResource("/stylesheets/scene.css").toExternalForm());
         stage.getIcons().add(new Image(StageBuilder.class.getResource("/icons/icon.png").toExternalForm()));
+
         return stage;
     }
 

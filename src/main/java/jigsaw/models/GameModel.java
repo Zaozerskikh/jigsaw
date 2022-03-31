@@ -29,7 +29,9 @@ public class GameModel {
      * @param figureBuilder class, that builds figure every move.
      * @param colorPicker class that selects random color for figures every new game.
      */
-    public GameModel(@Autowired GameView view, FigureBuilder figureBuilder, ColorPicker colorPicker) {
+    public GameModel(@Autowired GameView view,
+                     @Autowired FigureBuilder figureBuilder,
+                     @Autowired ColorPicker colorPicker) {
         this.view = view;
         this.figureBuilder = figureBuilder;
         this.colorPicker = colorPicker;

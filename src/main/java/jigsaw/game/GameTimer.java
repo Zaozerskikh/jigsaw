@@ -5,6 +5,8 @@ import javafx.animation.Timeline;
 import javafx.scene.control.Label;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
+import java.text.DecimalFormat;
 import java.time.Duration;
 import java.time.Instant;
 
@@ -22,9 +24,6 @@ public class GameTimer {
     // hh mm ss.
     private long hours, mins, seconds;
 
-    // String presentation for hh mm ss.
-    private String strHours, strMins, strSeconds;
-
     /**
      * Timer.
      */
@@ -35,6 +34,7 @@ public class GameTimer {
      * @param timerLabel label for timer's ticks showing.
      */
     public void start(Label timerLabel) {
+        DecimalFormat df = new DecimalFormat("00");
         this.startTime = Instant.now();
         timer = new Timeline(new KeyFrame(new javafx.util.Duration(1000), event -> {
             seconds = Duration.between(startTime, Instant.now()).getSeconds();
@@ -48,10 +48,7 @@ public class GameTimer {
                 seconds -= 60;
                 startTime = startTime.plusSeconds(60);
             }
-            strHours = String.valueOf(hours).length() < 2 ? "0" + hours : String.valueOf(hours);
-            strMins = String.valueOf(mins).length() < 2 ? "0" + mins : String.valueOf(mins);
-            strSeconds= String.valueOf(seconds).length() < 2 ? "0" + seconds : String.valueOf(seconds);
-            timerLabel.setText(strHours + ":" + strMins + ":" + strSeconds);
+            timerLabel.setText(df.format(hours) + ":" + df.format(mins) + ":" + df.format(seconds));
         }));
         timer.setCycleCount(Timeline.INDEFINITE);
         timer.play();

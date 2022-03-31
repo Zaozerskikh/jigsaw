@@ -15,17 +15,11 @@ public class Figure {
     private boolean[][] figureMatrix;
 
     /**
-     * Count of filled blocks in figureMatrix's.
-     */
-    private int figureSize;
-
-    /**
      * Setter for figure matrix.
      * @param figureMatrix figureMatrix.
      */
     public void setFigureMatrix(boolean[][] figureMatrix) {
         this.figureMatrix = figureMatrix;
-        calculateFigureSize();
     }
 
     /**
@@ -33,12 +27,7 @@ public class Figure {
      * @return figureMatrix size.
      */
     public int getFigureSize() {
-        return figureSize;
-    }
-
-    // pre-calculating figureMatrix size for better perfomance.
-    private void calculateFigureSize() {
-        figureSize = 0;
+        int figureSize = 0;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 if (figureMatrix[i][j]) {
@@ -46,6 +35,7 @@ public class Figure {
                 }
             }
         }
+        return figureSize;
     }
 
     /**

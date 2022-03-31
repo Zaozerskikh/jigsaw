@@ -10,6 +10,7 @@ import jigsaw.game.GameTimer;
 import jigsaw.models.GameModel;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 /**
@@ -23,7 +24,7 @@ public class GameController {
      * @param timer game timer object.
      * @param model game model object.
      */
-    public GameController(@Autowired GameTimer timer, GameModel model) {
+    public GameController(@Autowired GameTimer timer, @Autowired GameModel model) {
         this.timer = timer;
         this.model = model;
     }
