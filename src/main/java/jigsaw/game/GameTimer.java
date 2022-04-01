@@ -11,7 +11,7 @@ import java.time.Duration;
 import java.time.Instant;
 
 /**
- * Class that implements game timer object.
+ * Class that implements game timer gui object.
  */
 @Component("gameTimer")
 @Scope("singleton")

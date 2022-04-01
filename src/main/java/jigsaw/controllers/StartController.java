@@ -2,9 +2,10 @@ package jigsaw.controllers;
 
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import jigsaw.main.JavaFxApp;
 import jigsaw.stage_builder.StageBuilder;
 import net.rgielen.fxweaver.core.FxmlView;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,6 +14,20 @@ import org.springframework.stereotype.Component;
 @Component("startController")
 @FxmlView("/fxml_views/start_view.fxml")
 public class StartController {
+    /**
+     * Spring Boot application context.
+     */
+    private ConfigurableApplicationContext context;
+
+    /**
+     * Setter for Spring Boot application context.
+     * @param context Spring Boot application context.
+     */
+    @Autowired
+    public void setContext(ConfigurableApplicationContext context) {
+        this.context = context;
+    }
+
     /**
      * Button that starts new game.
      */
@@ -36,13 +51,13 @@ public class StartController {
      */
     public void onNewGameButtonClick() {
         getCurrentStage().close();
-        JavaFxApp.getContext().getBean(StageBuilder.class).buildStage(GameController.class, "Game").show();
+        context.getBean(StageBuilder.class).buildStage(GameController.class, "Game").show();
     }
 
     /**
      * Shows shows info about this application.
      */
     public void onInfoBittonClick() {
-        JavaFxApp.getContext().getBean(StageBuilder.class).buildStage(InfoController.class, "About").show();
+        context.getBean(StageBuilder.class).buildStage(InfoController.class, "About").show();
     }
 }

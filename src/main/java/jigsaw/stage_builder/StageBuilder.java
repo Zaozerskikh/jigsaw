@@ -4,16 +4,20 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
-import javafx.scene.layout.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import jigsaw.controllers.StartController;
 import jigsaw.game.GameCell;
-import jigsaw.main.JavaFxApp;
 import jigsaw.models.GameModel;
 import net.rgielen.fxweaver.core.FxWeaver;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
+import java.util.Objects;
 
 /**
  * Class that builds application stages.
@@ -21,6 +25,20 @@ import org.springframework.stereotype.Component;
 @Component("stageBuilder")
 @Scope("singleton")
 public class StageBuilder {
+    /**
+     * Spring Boot application context.
+     */
+    private ConfigurableApplicationContext context;
+
+    /**
+     * Setter for Spring Boot application context.
+     * @param context Spring Boot application context.
+     */
+    @Autowired
+    public void setContext(ConfigurableApplicationContext context) {
+        this.context = context;
+    }
+
     /**
      * @param controllerClass stage controller class.
      * @param stageName stage title.
@@ -31,7 +49,7 @@ public class StageBuilder {
         Stage stage = new Stage();
         stage.setTitle(stageName);
         try {
-            stage.setScene(new Scene(JavaFxApp.getContext().getBean(FxWeaver.class).loadView(controllerClass)));
+            stage.setScene(new Scene(context.getBean(FxWeaver.class).loadView(controllerClass)));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -44,7 +62,7 @@ public class StageBuilder {
                 alert.setContentText("Do you really want to leave game?");
                 alert.showAndWait().ifPresent(buttonType -> {
                     if (buttonType == ButtonType.OK) {
-                        JavaFxApp.getContext().getBean(GameModel.class).setStarted(false);
+                        context.getBean(GameModel.class).setStarted(false);
                         this.buildStage(StartController.class, "Jigsaw").show();
                     } else {
                         closeEvent.consume();
@@ -58,8 +76,8 @@ public class StageBuilder {
         }
 
         // stage decoration.
-        stage.getScene().getStylesheets().add(StageBuilder.class.getResource("/stylesheets/scene.css").toExternalForm());
-        stage.getIcons().add(new Image(StageBuilder.class.getResource("/icons/icon.png").toExternalForm()));
+        stage.getScene().getStylesheets().add(Objects.requireNonNull(StageBuilder.class.getResource("/stylesheets/scene.css")).toExternalForm());
+        stage.getIcons().add(new Image(Objects.requireNonNull(StageBuilder.class.getResource("/icons/icon.png")).toExternalForm()));
 
         return stage;
     }
@@ -73,7 +91,7 @@ public class StageBuilder {
         GridPane gridPane = new GridPane();
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                GameCell cell = JavaFxApp.getContext().getBean(GameCell.class);
+                GameCell cell = context.getBean(GameCell.class);
                 cell.setFocusTraversable(false);
                 cell.setMinSize(56, 56);
                 cell.setColor(Color.GHOSTWHITE);

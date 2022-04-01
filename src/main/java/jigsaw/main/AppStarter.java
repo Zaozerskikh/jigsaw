@@ -2,6 +2,7 @@ package jigsaw.main;
 
 import javafx.application.Application;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * Main application class.

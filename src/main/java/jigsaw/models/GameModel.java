@@ -9,12 +9,13 @@ import javafx.stage.Stage;
 import jigsaw.controllers.GameController;
 import jigsaw.controllers.StartController;
 import jigsaw.game.*;
-import jigsaw.main.JavaFxApp;
 import jigsaw.stage_builder.StageBuilder;
 import jigsaw.views.GameView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 
 /**
@@ -23,6 +24,20 @@ import java.util.ArrayList;
 @Component("gameModel")
 @Scope("singleton")
 public class GameModel {
+    /**
+     * Spring Boot application context.
+     */
+    private ConfigurableApplicationContext context;
+
+    /**
+     * Setter for Spring Boot application context.
+     * @param context Spring Boot application context.
+     */
+    @Autowired
+    public void setContext(ConfigurableApplicationContext context) {
+        this.context = context;
+    }
+
     /**
      * Constructor.
      * @param view game view object.
@@ -260,14 +275,14 @@ public class GameModel {
         if (buttonType == ButtonType.OK) {
             // starting new game.
             currStage.close();
-            currStage = JavaFxApp.getContext().getBean(StageBuilder.class).buildStage(GameController.class, "Game");
+            currStage = context.getBean(StageBuilder.class).buildStage(GameController.class, "Game");
             currStage.show();
-            JavaFxApp.getContext().getBean(GameController.class).startGame();
+            context.getBean(GameController.class).startGame();
         } else {
             // else exit to the main menu.
             currStage.close();
             setStarted(false);
-            JavaFxApp.getContext().getBean(StageBuilder.class).buildStage(StartController.class, "Jigsaw").show();
+            context.getBean(StageBuilder.class).buildStage(StartController.class, "Jigsaw").show();
         }
     }
 }

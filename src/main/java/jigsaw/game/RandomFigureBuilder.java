@@ -1,6 +1,7 @@
 package jigsaw.game;
 
-import jigsaw.main.JavaFxApp;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +13,15 @@ import java.util.concurrent.ThreadLocalRandom;
 @Component("randomFigureBuilder")
 @Scope("singleton")
 public class RandomFigureBuilder implements FigureBuilder {
+    /**
+     * Spring Boot application context.
+     */
+    private ConfigurableApplicationContext context;
+
+    @Autowired
+    public void setContext(ConfigurableApplicationContext context) {
+        this.context = context;
+    }
     /**
      * Size of figure matrix.
      */
@@ -159,7 +169,7 @@ public class RandomFigureBuilder implements FigureBuilder {
      */
     @Override
     public Figure buildFigure() {
-        Figure figure = JavaFxApp.getContext().getBean(Figure.class);
+        Figure figure = context.getBean(Figure.class);
         figure.setFigureMatrix(buildRandomFigureMatrix());
         return figure;
     }

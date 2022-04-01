@@ -17,15 +17,7 @@ public class JavaFxApp extends Application {
     /**
      * Spring Boot application context.
      */
-    private static ConfigurableApplicationContext context;
-
-    /**
-     * Getter for Spring Boot application context.
-     * @return context.
-     */
-    public static ConfigurableApplicationContext getContext() {
-        return context;
-    }
+    private ConfigurableApplicationContext context;
 
     /**
      * Application context initialization.
@@ -43,7 +35,7 @@ public class JavaFxApp extends Application {
      */
     @Override
     public void start(Stage stage) {
-        stage = JavaFxApp.getContext().getBean(StageBuilder.class).buildStage(StartController.class, "Jigsaw");
+        stage = context.getBean(StageBuilder.class).buildStage(StartController.class, "Jigsaw");
         stage.show();
     }
 
