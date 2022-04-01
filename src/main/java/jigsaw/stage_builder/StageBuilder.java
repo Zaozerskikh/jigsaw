@@ -53,7 +53,9 @@ public class StageBuilder {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        stage.setResizable(false);
+        if (!stageName.equals("About Jigsaw")) {
+            stage.setResizable(false);
+        }
         if (stageName.equals("Game")) {
             // Game stage close confirmation.
             stage.setOnCloseRequest(closeEvent -> {

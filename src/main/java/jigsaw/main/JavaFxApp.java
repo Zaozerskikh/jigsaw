@@ -12,6 +12,7 @@ import org.springframework.context.ConfigurableApplicationContext;
  * Class, that connects Spring Boot functional with JavaFX application.
  * Don't try running application from this entry point - Exception will be thrown.
  * Use AppStarter's entry point or "Jigsaw" run configuration.
+ * Building jar also available. To build executable jar run maven->package.
  */
 public class JavaFxApp extends Application {
     /**

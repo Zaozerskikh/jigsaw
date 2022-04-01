@@ -10,7 +10,6 @@ import jigsaw.game.GameTimer;
 import jigsaw.models.GameModel;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 /**

@@ -58,6 +58,6 @@ public class StartController {
      * Shows shows info about this application.
      */
     public void onInfoBittonClick() {
-        context.getBean(StageBuilder.class).buildStage(InfoController.class, "About").show();
+        context.getBean(StageBuilder.class).buildStage(InfoController.class, "About Jigsaw").show();
     }
 }

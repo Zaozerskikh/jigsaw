@@ -36,6 +36,8 @@ public class GameTimer {
     public void start(Label timerLabel) {
         DecimalFormat df = new DecimalFormat("00");
         this.startTime = Instant.now();
+        hours = 0;
+        mins = 0;
         timer = new Timeline(new KeyFrame(new javafx.util.Duration(1000), event -> {
             seconds = Duration.between(startTime, Instant.now()).getSeconds();
             while (seconds > 3599) {
